@@ -34,6 +34,7 @@ public class Calculator {
 
         // ex) postfixCal(postfix)
         System.out.println(cal.getCalResult(infix));
+        System.out.println(cal.getPostfixCalResult(infix));
         System.out.println(cal.getCalResult("4!"));
     }
 
@@ -41,7 +42,7 @@ public class Calculator {
         return postfixCal(convertToPostfix(infix));
     }
 
-    public String getPostfixCaluResult(String infix) {
+    public String getPostfixCalResult(String infix) {
         String result_format_That_Teacher_Really_Want_But_IDK_Why = "";
         String postfix = convertToPostfix(infix);
         String result = postfixCal(postfix);
