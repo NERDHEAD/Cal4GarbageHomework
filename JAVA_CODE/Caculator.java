@@ -75,7 +75,7 @@ public class Caculator {
             if(Character.isDigit(c)||c==' ') covertedInfix+=c;
             else covertedInfix+=" "+c+" ";
         }
-        covertedInfix=covertedInfix.replaceAll("  ", " ");
+        covertedInfix=covertedInfix.replaceAll("  ", " ").trim();
         return covertedInfix;
     }
 }
