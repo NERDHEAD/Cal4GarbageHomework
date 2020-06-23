@@ -31,6 +31,14 @@ public class Calculator {
         // ex) convertToPostfix(infix)
         testResult=cal.convertToPostfix(infix);
         System.out.println(testResult);
+
+        // ex) postfixCal(postfix)
+        System.out.println(cal.getCalResult(infix));
+        System.out.println(cal.getCalResult("4!"));
+    }
+
+    public String getCalResult(String infix) {
+        return postfixCal(convertToPostfix(infix));
     }
 
     public String getPostfixCaluResult(String infix) {
@@ -42,9 +50,19 @@ public class Calculator {
         return result_format_That_Teacher_Really_Want_But_IDK_Why;
     }
 
-    public String getStack(Stack<Character> stack){
+
+    //stack 변환 과정 테스트용
+    public String getStackC(Stack<Character> stack){
         String stackStr="";
         Stack<Character> copyStack= (Stack<Character>) stack.clone();
+        while(!copyStack.isEmpty()){
+            stackStr+=copyStack.pop()+" ";
+        }
+        return stackStr;
+    }
+    public String getStackS(Stack<String> stack){
+        String stackStr="";
+        Stack<String> copyStack= (Stack<String>) stack.clone();
         while(!copyStack.isEmpty()){
             stackStr+=copyStack.pop()+" ";
         }
@@ -98,12 +116,96 @@ public class Calculator {
     }
 
 
-    //TODO : 해야함
     private String postfixCal(String postfix) {
+        System.out.println("postfixCal on Run!");
         String result = "";
+        Stack<String> stackNum =new Stack<>();      
+        String postfixArray[]=postfix.split(" ");
+
+        for(String str : postfixArray){
+            if(isNumber(str)) stackNum.add(str);
+            else calculate(stackNum, str);
+        }result=stackNum.pop();
         // 대충 postfix를 받아 연산하는 내용
         return result;
     }
+
+    private void calculate(Stack<String> stackNum, String str){
+        //테스트
+        String myStack=getStackS(stackNum);
+        System.out.println("calculate Stack : "+myStack);        
+
+        double numberA, numberB;
+        String result="";
+        //jdk7 이후 부터 switch문에 String 형도 가능하게 된 것을 확인함
+
+        //int형으로 고정인 팩토리얼은 따로 계산 할것
+        if(str.equals("!")){
+            int number=Integer.parseInt(stackNum.pop());
+            result=Integer.toString(factorial(number));
+            stackNum.add(result);
+        }
+        else{
+            numberB=Double.parseDouble(stackNum.pop());
+            numberA=Double.parseDouble(stackNum.pop());
+
+            double resultDouble;
+
+            switch(str){
+                case "^" : 
+                    resultDouble=Math.pow(numberA, numberB);
+                    break;
+                case "#" :
+                    resultDouble=Math.pow(numberA, 1.0/numberB);
+                    break;
+                case "*" :
+                case "X" :
+                case "x" :
+                    resultDouble=numberA*numberB;
+                    break;
+                case "/" :
+                    resultDouble=numberA/numberB;
+                    break;
+                case "%" :
+                    resultDouble=numberA%numberB;
+                    break;
+                case "-" :
+                    resultDouble=numberA-numberB;
+                    break;
+                case "+" :
+                    resultDouble=numberA+numberB;
+                    break;
+                default :
+                    System.out.println("What is : "+ str);
+                    resultDouble=0.0;
+
+            }stackNum.add(Double.toString(resultDouble));
+        }
+
+    }
+
+
+    //팩토리얼 연산
+    private int factorial(int number){
+        if(number<=1) return number;
+        else return factorial(number-1)*number;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // 15+25*23 같은걸 좀더 배열화 하기 쉽게 숫자앞뒤에 공백을 추가해
