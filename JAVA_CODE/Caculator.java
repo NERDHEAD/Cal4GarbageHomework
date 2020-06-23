@@ -9,4 +9,17 @@ class Caculator {
         //후위계산식을 연산하기
         //String result=postfixCal(postfix);
     }
+
+
+    public String convertToPostfix(String infix){
+        String postfix="";
+        //대충 infix를 postfix로 치환 하는 내용
+        return postfix;
+    }
+
+    public String postfixCal(String postfix){
+        String result="";
+        //대충 postfix를 받아 연산하는 내용
+        return result;
+    }
 }
