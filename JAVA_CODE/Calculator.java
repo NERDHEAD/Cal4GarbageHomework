@@ -2,26 +2,26 @@ package JAVA_CODE;
 
 import java.util.Stack;
 
-public class Calculator {
-    public static void main(String[] args) {
-        Calculator cal = new Calculator();
-        String infix = "1.0+2+(3+4)*5";
-        // infix->postfix ->calculate!
-        // 중위계산식을 후위계산식으로 치환하기
-        // String infix="대충 중위 계산식";
-        // String postfix=convertToPostfix(infix);
-        // 후위계산식을 연산하기
-        // String result=postfixCal(postfix);
+public class Calculator {        
+    // infix->postfix ->calculate!
+    // 중위계산식을 후위계산식으로 치환하기
+    // String infix="대충 중위 계산식";
+    // String postfix=convertToPostfix(infix);
+    // 후위계산식을 연산하기
+    // String result=postfixCal(postfix);
 
-        // 결과물
-        // String s=getPostfixCalResult(infix);
-        // "infix --> [postfix] --> result"
+    // 결과물
+    // String s=getPostfixCalResult(infix);
+    // "infix --> [postfix] --> result"
 
-        
+    //public static void main(String[] args) {
+        //Calculator cal = new Calculator();
+        //String infix = "1.0+2+(3+4)*5!";
+        //System.out.println(cal.getPostfixCalResult(infix));
 
         // ex) rowInfixConverter(infix)
-        String testResult = cal.rowInfixConverter(infix);
-        System.out.println(testResult);
+        //String testResult = cal.rowInfixConverter(infix);
+        //System.out.println(testResult);
 
         // ex) isNumber(number)
         //String number="12.34";
@@ -29,14 +29,13 @@ public class Calculator {
         //else System.out.println("숫자 ㄴㄴ");
 
         // ex) convertToPostfix(infix)
-        testResult=cal.convertToPostfix(infix);
-        System.out.println(testResult);
+        //testResult=cal.convertToPostfix(infix);
+        //System.out.println(testResult);
 
         // ex) postfixCal(postfix)
-        System.out.println(cal.getCalResult(infix));
-        System.out.println(cal.getPostfixCalResult(infix));
-        System.out.println(cal.getCalResult("4!"));
-    }
+        //System.out.println(cal.getCalResult(infix));
+        //System.out.println(cal.getCalResult("4!"));
+    //}
 
     public String getCalResult(String infix) {
         return postfixCal(convertToPostfix(infix));
@@ -46,14 +45,18 @@ public class Calculator {
         String result_format_That_Teacher_Really_Want_But_IDK_Why = "";
         String postfix = convertToPostfix(infix);
         String result = postfixCal(postfix);
+        //String result="";
+        System.out.println("infix : "+infix);
+        System.out.println("postfix : "+postfix);
+
 
         result_format_That_Teacher_Really_Want_But_IDK_Why = infix + " --> [" + postfix + "] --> " + result;
         return result_format_That_Teacher_Really_Want_But_IDK_Why;
     }
 
-
+    
     //stack 변환 과정 테스트용
-    public String getStackC(Stack<Character> stack){
+    private String getStackC(Stack<Character> stack){
         String stackStr="";
         Stack<Character> copyStack= (Stack<Character>) stack.clone();
         while(!copyStack.isEmpty()){
@@ -61,7 +64,7 @@ public class Calculator {
         }
         return stackStr;
     }
-    public String getStackS(Stack<String> stack){
+    private String getStackS(Stack<String> stack){
         String stackStr="";
         Stack<String> copyStack= (Stack<String>) stack.clone();
         while(!copyStack.isEmpty()){
@@ -70,8 +73,8 @@ public class Calculator {
         return stackStr;
     }
 
-    public String convertToPostfix(String infix) {
-        System.out.println("convertToPostfix on Run!");
+    private String convertToPostfix(String infix) {
+        //System.out.println("convertToPostfix on Run!");
         infix=rowInfixConverter(infix);
         Stack<Character> stack =new Stack<>();
         String postfix = "";
@@ -118,7 +121,7 @@ public class Calculator {
 
 
     private String postfixCal(String postfix) {
-        System.out.println("postfixCal on Run!");
+        //System.out.println("postfixCal on Run!");
         String result = "";
         Stack<String> stackNum =new Stack<>();      
         String postfixArray[]=postfix.split(" ");
@@ -134,7 +137,7 @@ public class Calculator {
     private void calculate(Stack<String> stackNum, String str){
         //테스트
         String myStack=getStackS(stackNum);
-        System.out.println("calculate Stack : "+myStack);        
+        //System.out.println("calculate Stack : "+myStack);        
 
         double numberA, numberB;
         String result="";
@@ -213,7 +216,7 @@ public class Calculator {
     // 15 + 25 * 23 으로 치환해줌
     public String rowInfixConverter(String infix) {
         
-        System.out.println("rowInfixConverter on Run!");
+        //System.out.println("rowInfixConverter on Run!");
         String rowInfix;
         String covertedInfix = "";
         // 처리전 쓰잘데기 없는 공백 제거(오류방지)
@@ -246,6 +249,7 @@ public class Calculator {
     private int operatorPriority(char c){
         if(c=='(') return 0;
         if(c=='+' || c=='-') return 1;
+        if(c=='!') return 3;
         else return 2;
     }
 }
