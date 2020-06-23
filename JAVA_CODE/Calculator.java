@@ -3,9 +3,8 @@ package JAVA_CODE;
 import java.util.Stack;
 
 public class Calculator {
-    private Stack stack;
     public static void main(final String[] args) {
-        final String infix = "1+2+(3+4)*5";
+        String infix = "1.0+2+(3+4)*5";
         // infix->postfix ->calculate!
         // 중위계산식을 후위계산식으로 치환하기
         // String infix="대충 중위 계산식";
@@ -20,27 +19,33 @@ public class Calculator {
         final Calculator cal = new Calculator();
 
         // ex) rowInfixConverter(infix)
-        final String testResult = cal.rowInfixConverter(infix);
+        String testResult = cal.rowInfixConverter(infix);
         System.out.println(testResult);
     }
 
     public String getPostfixCaluResult(final String infix) {
         String result_format_That_Teacher_Really_Want_But_IDK_Why = "";
-        final String postfix = convertToPostfix(infix);
-        final String result = postfixCal(postfix);
+        String postfix = convertToPostfix(infix);
+        String result = postfixCal(postfix);
 
         result_format_That_Teacher_Really_Want_But_IDK_Why = infix + " --> [" + postfix + "] --> " + result;
         return result_format_That_Teacher_Really_Want_But_IDK_Why;
     }
 
+    //TODO : 해야함
     private String convertToPostfix(final String infix) {
-        final String postfix = "";
+        String postfix = "";
         // 대충 infix를 postfix로 치환 하는 내용
+
+
+
         return postfix;
     }
 
+
+    //TODO : 해야함
     private String postfixCal(final String postfix) {
-        final String result = "";
+        String result = "";
         // 대충 postfix를 받아 연산하는 내용
         return result;
     }
@@ -54,9 +59,9 @@ public class Calculator {
         // 처리전 쓰잘데기 없는 공백 제거(오류방지)
         rowInfix = infix.replaceAll(" ", "").trim();
         // char 배열화
-        final char[] charInfix = rowInfix.toCharArray();
+        char[] charInfix = rowInfix.toCharArray();
         for (final char c : charInfix) {
-            if(Character.isDigit(c)||c==' ') covertedInfix+=c;
+            if(Character.isDigit(c)||c=='.') covertedInfix+=c;
             else covertedInfix+=" "+c+" ";
         }
         covertedInfix=covertedInfix.replaceAll("  ", " ").trim();
